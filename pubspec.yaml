@@ -1,0 +1,9 @@
+name: _
+publish_to: none
+environment:
+  sdk: ^3.6.0
+
+workspace:
+  - flutter_mediapipe_vision
+  - flutter_mediapipe_vision_platform_interface
+  - flutter_mediapipe_vision_web
