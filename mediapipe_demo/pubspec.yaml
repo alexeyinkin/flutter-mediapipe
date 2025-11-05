@@ -1,0 +1,15 @@
+name: mediapipe_demo
+publish_to: none
+
+environment:
+  sdk: ^3.8.0
+  flutter: ^3.35.0
+
+dependencies:
+  camera: ^0.11.2
+  flutter: { sdk: flutter }
+  flutter_mediapipe_vision: { path: ../flutter_mediapipe_vision }
+
+dependency_overrides:
+  flutter_mediapipe_vision_platform_interface: { path: ../flutter_mediapipe_vision_platform_interface }
+  flutter_mediapipe_vision_web: { path: ../flutter_mediapipe_vision_web }

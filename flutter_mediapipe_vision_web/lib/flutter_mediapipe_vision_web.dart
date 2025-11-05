@@ -3,8 +3,8 @@ import 'dart:js_interop';
 import 'dart:js_interop_unsafe';
 import 'dart:typed_data';
 
-import 'package:flutter_mediapipe_vision/flutter_mediapipe_vision.dart';
 import 'package:flutter_mediapipe_vision_platform_interface/flutter_mediapipe_vision_platform_interface.dart';
+import 'package:flutter_mediapipe_vision_platform_interface/models.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:web/web.dart' as web;
 
@@ -30,9 +30,7 @@ class FlutterMediapipeVisionWeb extends FlutterMediapipeVisionPlatform {
       _initFuture ?? (_initFuture = _initOnce());
 
   Future<void> _initOnce() async {
-    print('initOnce()');
-
-    await injectSrcScript(
+    await _injectSrcScript(
       'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js',
       _windowVar,
     );
@@ -44,7 +42,8 @@ class FlutterMediapipeVisionWeb extends FlutterMediapipeVisionPlatform {
     final options = PoseLandmarkerOptions(
       baseOptions: BaseOptions(
         modelAssetPath:
-            "packages/flutter_mediapipe_vision/assets/assets/models/pose_landmarker_lite.task",
+            "packages/flutter_mediapipe_vision_platform_interface/assets/"
+            "assets/models/pose_landmarker_lite.task",
       ),
       numPoses: 5,
       runningMode: "IMAGE",
@@ -53,7 +52,7 @@ class FlutterMediapipeVisionWeb extends FlutterMediapipeVisionPlatform {
     _landmarker = await mp.PoseLandmarker.createFromOptions(fs, options).toDart;
   }
 
-  Future<void> injectSrcScript(String src, String windowVar) async {
+  Future<void> _injectSrcScript(String src, String windowVar) async {
     final web.HTMLScriptElement script =
         web.document.createElement('script') as web.HTMLScriptElement;
     script.type = 'text/javascript';
@@ -62,8 +61,8 @@ class FlutterMediapipeVisionWeb extends FlutterMediapipeVisionPlatform {
     final stringUrl = src;
     script.text =
         '''
-    window.ff_trigger_$windowVar = async (callback) => {
-      console.debug("MediaPipe $windowVar");
+    window.my_trigger_$windowVar = async (callback) => {
+      console.debug("Initializing MediaPipe $windowVar");
       callback(await import("$stringUrl"));
     };
     ''';
@@ -74,10 +73,10 @@ class FlutterMediapipeVisionWeb extends FlutterMediapipeVisionPlatform {
     Completer completer = Completer();
 
     globalContext.callMethod(
-      'ff_trigger_$windowVar'.toJS,
+      'my_trigger_$windowVar'.toJS,
       (JSAny module) {
         globalContext[windowVar] = module;
-        globalContext.delete('ff_trigger_$windowVar'.toJS);
+        globalContext.delete('my_trigger_$windowVar'.toJS);
         completer.complete();
       }.toJS,
     );
@@ -88,7 +87,7 @@ class FlutterMediapipeVisionWeb extends FlutterMediapipeVisionPlatform {
   @override
   Future<PoseLandmarkerResult> detect(Uint8List bytes) async {
     PoseLandmarkerResult r = PoseLandmarkerResult.empty();
-    final el = await createImageFromBytes(bytes);
+    final el = await _createImageFromBytes(bytes);
 
     _landmarker!.detect(
       el,
@@ -101,12 +100,12 @@ class FlutterMediapipeVisionWeb extends FlutterMediapipeVisionPlatform {
   }
 }
 
-Future<web.HTMLImageElement> createImageFromBytes(Uint8List bytes) async {
+Future<web.HTMLImageElement> _createImageFromBytes(Uint8List bytes) async {
   final completer = Completer();
 
   final blob = web.Blob(
     [bytes.toJS].toJS,
-    web.BlobPropertyBag(type: detectImageFormat(bytes)),
+    web.BlobPropertyBag(type: _detectImageFormat(bytes)),
   );
   final imageUrl = web.URL.createObjectURL(blob);
   final el = web.document.createElement('img') as web.HTMLImageElement;
@@ -125,7 +124,7 @@ Future<web.HTMLImageElement> createImageFromBytes(Uint8List bytes) async {
   return el;
 }
 
-String detectImageFormat(Uint8List data) {
+String _detectImageFormat(Uint8List data) {
   if (data.length < 8) {
     throw Exception('Not an image.');
   }
@@ -212,5 +211,5 @@ extension on js_plr.PoseLandmarkerResult {
 
 extension on js_plr.NormalizedLandmark {
   NormalizedLandmark get toDart =>
-      NormalizedLandmark(x: x, y: y, z: z, visibility: visibility ?? 0);
+      NormalizedLandmark(x: x.toDouble(), y: y.toDouble());
 }
