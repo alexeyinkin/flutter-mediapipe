@@ -42,7 +42,7 @@ class FlutterMediapipeVisionWeb extends FlutterMediapipeVisionPlatform {
     final options = PoseLandmarkerOptions(
       baseOptions: BaseOptions(
         modelAssetPath:
-            "packages/flutter_mediapipe_vision_platform_interface/assets/"
+            "assets/packages/flutter_mediapipe_vision_platform_interface/"
             "assets/models/pose_landmarker_lite.task",
       ),
       numPoses: 5,
