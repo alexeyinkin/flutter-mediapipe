@@ -36,7 +36,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .mediapipe_demo/build/web
+          path: ./mediapipe_demo/build/web
 
   deploy:
     needs: build
