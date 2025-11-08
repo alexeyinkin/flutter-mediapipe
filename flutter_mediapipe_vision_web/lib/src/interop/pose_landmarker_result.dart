@@ -9,4 +9,6 @@ extension type PoseLandmarkerResult._(JSObject _) implements JSObject {
 extension type NormalizedLandmark._(JSObject _) implements JSObject {
   external num get x;
   external num get y;
+  external num get z;
+  external num? get visibility;
 }

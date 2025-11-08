@@ -210,6 +210,10 @@ extension on js_plr.PoseLandmarkerResult {
 }
 
 extension on js_plr.NormalizedLandmark {
-  NormalizedLandmark get toDart =>
-      NormalizedLandmark(x: x.toDouble(), y: y.toDouble());
+  NormalizedLandmark get toDart => NormalizedLandmark(
+    x: x.toDouble(),
+    y: y.toDouble(),
+    z: z.toDouble(),
+    visibility: visibility?.toDouble() ?? 0,
+  );
 }
