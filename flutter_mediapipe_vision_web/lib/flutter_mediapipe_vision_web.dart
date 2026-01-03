@@ -41,6 +41,7 @@ class FlutterMediapipeVisionWeb extends FlutterMediapipeVisionPlatform {
 
     final options = PoseLandmarkerOptions(
       baseOptions: BaseOptions(
+        delegate: 'CPU',
         modelAssetPath:
             "assets/packages/flutter_mediapipe_vision_platform_interface/"
             "assets/models/pose_landmarker_lite.task",
@@ -100,28 +101,12 @@ class FlutterMediapipeVisionWeb extends FlutterMediapipeVisionPlatform {
   }
 }
 
-Future<web.HTMLImageElement> _createImageFromBytes(Uint8List bytes) async {
-  final completer = Completer();
-
+Future<web.TexImageSource> _createImageFromBytes(Uint8List bytes) async {
   final blob = web.Blob(
     [bytes.toJS].toJS,
     web.BlobPropertyBag(type: _detectImageFormat(bytes)),
   );
-  final imageUrl = web.URL.createObjectURL(blob);
-  final el = web.document.createElement('img') as web.HTMLImageElement;
-
-  el.onload = () {
-    web.URL.revokeObjectURL(imageUrl);
-    completer.complete();
-  }.toJS;
-  el.onerror = () {
-    web.URL.revokeObjectURL(imageUrl);
-    completer.completeError('Cannot load the image.');
-  }.toJS;
-
-  el.src = imageUrl;
-  await completer.future;
-  return el;
+  return await web.window.createImageBitmap(blob).toDart;
 }
 
 String _detectImageFormat(Uint8List data) {

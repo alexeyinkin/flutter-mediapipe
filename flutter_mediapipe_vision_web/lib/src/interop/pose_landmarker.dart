@@ -11,7 +11,7 @@ extension type PoseLandmarker._(JSObject _) implements JSObject {
     PoseLandmarkerOptions options,
   );
 
-  external void detect(HTMLImageElement img, JSFunction callback);
+  external void detect(TexImageSource img, JSFunction callback);
 }
 
 // https://github.com/google-ai-edge/mediapipe/blob/master/mediapipe/tasks/web/vision/pose_landmarker/pose_landmarker_options.d.ts
@@ -33,7 +33,8 @@ extension type PoseLandmarkerOptions._(JSObject _) implements JSObject {
 // https://github.com/google-ai-edge/mediapipe/blob/master/mediapipe/tasks/web/core/task_runner_options.d.ts
 // https://github.com/google-ai-edge/mediapipe/blob/master/mediapipe/tasks/web/vision/core/vision_task_options.d.ts
 extension type BaseOptions._(JSObject _) implements JSObject {
-  external BaseOptions({String modelAssetPath});
+  external BaseOptions({String delegate, String modelAssetPath});
 
+  external String get delegate;
   external String get modelAssetPath;
 }

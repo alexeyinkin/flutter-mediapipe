@@ -1,3 +1,7 @@
+## 0.2.1
+
+* Pass the image with `createImageBitmap(blob)` instead of `HTMLImageElement`.
+
 ## 0.2.0
 
 * Support and require flutter_mediapipe_vision_platform_interface 0.2.0.

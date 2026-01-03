@@ -1,7 +1,7 @@
 name: flutter_mediapipe_vision_platform_interface
 description: A minimal wrapper for the pose landmark detector
 repository: https://github.com/alexeyinkin/flutter-mediapipe
-version: 0.2.0
+version: 0.2.1
 resolution: workspace
 
 environment:
@@ -10,7 +10,12 @@ environment:
 
 dependencies:
   flutter: { sdk: flutter }
+  json_annotation: ^4.9.0
   plugin_platform_interface: ^2.1.8
+
+dev_dependencies:
+  build_runner: ^2.10.4
+  json_serializable: ^6.11.1
 
 flutter:
   assets:
