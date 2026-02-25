@@ -1,3 +1,7 @@
+## 0.3.0
+
+* Added `detectOnPlanes`.
+
 ## 0.2.1
 
 * Pass the image with `createImageBitmap(blob)` instead of `HTMLImageElement`.

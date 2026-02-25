@@ -1,3 +1,8 @@
+## 0.3.0
+
+* Added `detectOnPlanes`.
+* Linked the Android implementation.
+
 ## 0.2.1
 
 * Support and require v0.2.1 of the interface and implementations.

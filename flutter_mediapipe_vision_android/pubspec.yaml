@@ -1,23 +1,22 @@
-name: flutter_mediapipe_vision
+name: flutter_mediapipe_vision_android
 description: A minimal wrapper for the pose landmark detector
 repository: https://github.com/alexeyinkin/flutter-mediapipe
 version: 0.3.0
 resolution: workspace
 
 environment:
-  sdk: ^3.8.0
+  sdk: ^3.11.0
   flutter: '>=3.35.0'
 
 dependencies:
   flutter: { sdk: flutter }
-  flutter_mediapipe_vision_android: ^0.3.0
+  flutter_web_plugins: { sdk: flutter }
   flutter_mediapipe_vision_platform_interface: ^0.3.0
-  flutter_mediapipe_vision_web: ^0.3.0
+  plugin_platform_interface: ^2.0.2
 
 flutter:
   plugin:
     platforms:
       android:
-        default_package: flutter_mediapipe_vision_android
-      web:
-        default_package: flutter_mediapipe_vision_web
+        package: com.ainkin.flutter_mediapipe_vision
+        pluginClass: FlutterMediapipeVisionPlugin

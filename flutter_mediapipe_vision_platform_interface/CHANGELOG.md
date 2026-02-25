@@ -1,3 +1,8 @@
+## 0.3.0
+
+* Added `detectOnPlanes`.
+* Actually returning result from `detect`.
+
 ## 0.2.1
 
 * Make `PoseLandmarkerResult` and `NormalizedLandmark` serializable to JSON.

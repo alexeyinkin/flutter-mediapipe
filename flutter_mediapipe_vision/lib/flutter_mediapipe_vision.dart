@@ -13,4 +13,16 @@ class FlutterMediapipeVision {
   static Future<PoseLandmarkerResult> detect(Uint8List bytes) async {
     return await FlutterMediapipeVisionPlatform.instance.detect(bytes);
   }
+
+  static Future<PoseLandmarkerResult> detectOnPlanes(
+    List<Uint8List> planes, {
+    required int width,
+    required int height,
+  }) async {
+    return await FlutterMediapipeVisionPlatform.instance.detectOnPlanes(
+      planes,
+      width: width,
+      height: height,
+    );
+  }
 }

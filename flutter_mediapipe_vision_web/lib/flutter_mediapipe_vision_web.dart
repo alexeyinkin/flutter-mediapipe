@@ -99,6 +99,15 @@ class FlutterMediapipeVisionWeb extends FlutterMediapipeVisionPlatform {
 
     return r;
   }
+
+  @override
+  Future<PoseLandmarkerResult> detectOnPlanes(
+    List<Uint8List> planes, {
+    required int width,
+    required int height,
+  }) async {
+    throw UnimplementedError();
+  }
 }
 
 Future<web.TexImageSource> _createImageFromBytes(Uint8List bytes) async {
