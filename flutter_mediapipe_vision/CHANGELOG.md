@@ -1,3 +1,7 @@
+## 0.3.1
+
+* Linked the iOS implementation.
+
 ## 0.3.0
 
 * Added `detectOnPlanes`.

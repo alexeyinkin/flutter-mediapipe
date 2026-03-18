@@ -1,0 +1,19 @@
+name: flutter_mediapipe_vision_ios
+description: A minimal wrapper for the pose landmark detector
+repository: https://github.com/alexeyinkin/flutter-mediapipe
+version: 0.3.1
+resolution: workspace
+
+environment:
+  sdk: ^3.11.0
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter: { sdk: flutter }
+  plugin_platform_interface: ^2.0.2
+
+flutter:
+  plugin:
+    platforms:
+      ios:
+        pluginClass: FlutterMediapipeVisionPlugin
