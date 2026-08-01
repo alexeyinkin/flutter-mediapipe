@@ -1,3 +1,7 @@
+## 0.3.2
+
+* Require an web version fixed after MediaPipe 1.0.0 release.
+
 ## 0.3.1
 
 * Linked the iOS implementation.

@@ -13,6 +13,7 @@ import 'src/interop/pose_landmarker.dart';
 import 'src/interop/pose_landmarker_result.dart' as js_plr;
 
 const _windowVar = 'flutter_mediapipe_vision';
+const _mpVersion = '1.0.1';
 
 PoseLandmarker? _landmarker;
 
@@ -31,12 +32,12 @@ class FlutterMediapipeVisionWeb extends FlutterMediapipeVisionPlatform {
 
   Future<void> _initOnce() async {
     await _injectSrcScript(
-      'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js',
+      'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@$_mpVersion/vision_bundle.mjs',
       _windowVar,
     );
 
     final fs = await mp.FilesetResolver.forVisionTasks(
-      'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm',
+      'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@$_mpVersion/wasm',
     ).toDart;
 
     final options = PoseLandmarkerOptions(

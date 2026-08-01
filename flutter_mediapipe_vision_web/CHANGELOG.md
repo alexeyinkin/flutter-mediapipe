@@ -1,3 +1,8 @@
+## 0.3.1
+
+* Load `vision_bundle.mjs` instead of `.js` that stopped being a symlink in MediaPipe v1.0.0.
+* Pin the version to `1.0.1`.
+
 ## 0.3.0
 
 * Added `detectOnPlanes`.
